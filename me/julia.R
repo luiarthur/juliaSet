@@ -1,30 +1,46 @@
-library(MASS)
-a <- -.25+0i
+source("countdown.R")
+f <- function(x,c=-.7-.4i) x^2+c # |c| = sqrt(a^2+b^2) < 2
 
-f <- function(x,c=a) x^2+c # |c| = sqrt(a^2+b^2) < 2
+#Fx <- function(x,it=0,c=a,maxIts=20,col=10) {
+#  if (it==maxIts) {
+#    f(x)
+#  } else {  
+#    Fx(f(x),it+1)
+#  }
+#}
 
-Fx <- function(x,it=0,c=a) {
-  if (it==20) {
-    f(x)
-  } else {  
-    Fx(f(x),it+1)
+cl <- colors()
+Fx <- function(x,it=0,maxIts=60,col=1) {
+  if (it==maxIts) {
+    24 # black
+  } else {
+    ifelse(abs(x)>2,col*10, Fx(f(x),it+1,col=col+1))
   }
 }
 
 n <- 1000
-#x <- seq(-.2,.2,len=n)
-#y <- seq(-.2,.2,len=n)
-x <- rnorm(n)
-y <- rnorm(n)
+x <- seq(-2,2,len=n)
+y <- seq(-2,2,len=n)
+#x <- rnorm(n)
+#y <- rnorm(n)
+lx <- length(x)
+ly <- length(y)
 M <- matrix(0,n,n) 
 
-for (i in 1:length(x)) {
-  for (j in 1:length(y)) {
+# Loops
+for (i in 1:lx){
+  ot <- Sys.time()
+  for (j in 1:ly) {
     M[i,j] <- complex(re=x[i],im=y[j])
   }
+  count.down(ot,i,lx)
 }
 
+#Z <- Fx(M)
+#ok <- M[which(!(is.na(Z)) & abs(Z)<2)]
+#par("bg"="black"); plot(Re(ok),Im(ok),pch='.',col="yellow")
 
-Z <- Fx(M)
-ok <- Z[which(!(is.na(Z)) & abs(Z)<2)]
-plot(Re(ok),Im(ok),pch=20)
+Z2 <- Fx(M)
+#pcolor <- acolor[c(Z2)]
+par("bg"="red"); plot(Re(M),Im(M),pch='.',col=cl[Z2])
+

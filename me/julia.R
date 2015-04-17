@@ -1,9 +1,7 @@
-# OLD VERSION
-
 source("countdown.R")
-f <- function(x,c=-.7-.4i) x^2+c # |c| = sqrt(a^2+b^2) < 2
+#f <- function(x,c=-.7-.4i) x^2+c # |c| = sqrt(a^2+b^2) < 2
+f <- function(x,c=.3-.5i) x^2+c # |c| = sqrt(a^2+b^2) < 2
 
-cl <- colors()
 Fx <- function(x,it=0,maxIts=60,col=1,bound=2) {
   if (it==maxIts) {
     24 # black
@@ -15,8 +13,6 @@ Fx <- function(x,it=0,maxIts=60,col=1,bound=2) {
 n <- 1000
 x <- seq(-2,2,len=n)
 y <- seq(-2,2,len=n)
-#x <- rnorm(n)
-#y <- rnorm(n)
 lx <- length(x)
 ly <- length(y)
 M <- matrix(0,n,n) 
@@ -30,16 +26,6 @@ for (i in 1:lx){
   count.down(ot,i,lx)
 }
 
-#Fx <- function(x,it=0,c=a,maxIts=20,col=10) {
-#  if (it==maxIts) {
-#    f(x)
-#  } else {  
-#    Fx(f(x),it+1)
-#  }
-#}
-#Z <- Fx(M)
-#par("bg"="red"); plot(Re(M),Im(M),pch='.',col=cl[Z2])
-
-Z2 <- Fx(M,maxIts=100)
-pdf
+Z2 <- Fx(M,maxIts=100,bound=2)
 par("bg"="black"); image(Z2,col=paste0("grey",1:100),useRaster=T)
+#par("bg"="black"); image(Z2,col=paste0("grey",sample(1:100)),useRaster=T)

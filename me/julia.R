@@ -27,5 +27,5 @@ for (i in 1:lx){
 }
 
 Z2 <- Fx(M,maxIts=100,bound=2)
+#svg("manderboltIndian.svg",height=13,width=23)
 par("bg"="black"); image(Z2,col=paste0("grey",1:100),useRaster=T)
-#par("bg"="black"); image(Z2,col=paste0("grey",sample(1:100)),useRaster=T)

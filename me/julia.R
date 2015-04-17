@@ -1,6 +1,6 @@
 source("countdown.R")
-#f <- function(x,c=-.7-.4i) x^2+c # |c| = sqrt(a^2+b^2) < 2
-f <- function(x,c=.3-.5i) x^2+c # |c| = sqrt(a^2+b^2) < 2
+f <- function(x,c=-.7-.4i) x^2+c # |c| = sqrt(a^2+b^2) < 2
+#f <- function(x,c=.3-.5i) x^2+c # |c| = sqrt(a^2+b^2) < 2
 
 Fx <- function(x,it=0,maxIts=60,col=1,bound=2) {
   if (it==maxIts) {

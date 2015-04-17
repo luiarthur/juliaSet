@@ -26,6 +26,6 @@ for (i in 1:lx){
   count.down(ot,i,lx)
 }
 
-Z2 <- Fx(M,maxIts=100,bound=2)
+Z2 <- Fx(M,maxIts=100)
 #svg("manderboltIndian.svg",height=13,width=23)
 par("bg"="black"); image(Z2,col=paste0("grey",1:100),useRaster=T)

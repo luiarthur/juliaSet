@@ -1,20 +1,14 @@
+# OLD VERSION
+
 source("countdown.R")
 f <- function(x,c=-.7-.4i) x^2+c # |c| = sqrt(a^2+b^2) < 2
 
-#Fx <- function(x,it=0,c=a,maxIts=20,col=10) {
-#  if (it==maxIts) {
-#    f(x)
-#  } else {  
-#    Fx(f(x),it+1)
-#  }
-#}
-
 cl <- colors()
-Fx <- function(x,it=0,maxIts=60,col=1) {
+Fx <- function(x,it=0,maxIts=60,col=1,bound=2) {
   if (it==maxIts) {
     24 # black
   } else {
-    ifelse(abs(x)>2,col*10, Fx(f(x),it+1,col=col+1))
+    ifelse(abs(x)>bound,col*10, Fx(f(x),it+1,col=col+1))
   }
 }
 
@@ -36,11 +30,16 @@ for (i in 1:lx){
   count.down(ot,i,lx)
 }
 
+#Fx <- function(x,it=0,c=a,maxIts=20,col=10) {
+#  if (it==maxIts) {
+#    f(x)
+#  } else {  
+#    Fx(f(x),it+1)
+#  }
+#}
 #Z <- Fx(M)
-#ok <- M[which(!(is.na(Z)) & abs(Z)<2)]
-#par("bg"="black"); plot(Re(ok),Im(ok),pch='.',col="yellow")
+#par("bg"="red"); plot(Re(M),Im(M),pch='.',col=cl[Z2])
 
-Z2 <- Fx(M)
-#pcolor <- acolor[c(Z2)]
-par("bg"="red"); plot(Re(M),Im(M),pch='.',col=cl[Z2])
-
+Z2 <- Fx(M,maxIts=100)
+pdf
+par("bg"="black"); image(Z2,col=paste0("grey",1:100),useRaster=T)
